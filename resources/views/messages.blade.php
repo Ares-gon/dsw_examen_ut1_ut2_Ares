@@ -14,8 +14,17 @@
         @else
             <ul>
                 @foreach($messages as $message)
-                    <li>{{ $message->text }}</li>
+                    @if($message->subrayado == "1" && $message->negrita == "1")
+                        <b><u><li>{{ $message->text }}</li></u></b>
+                    @elseif($message->negrita == "1")
+                        <b><li>{{ $message->text }}</li></b>
+                    @elseif($message->subrayado == "1")
+                        <u><li>{{ $message->text }}</li></u>
+                    @else
+                        <li>{{ $message->text }}</li>
+                    @endif
                 @endforeach
+                <a href="{{route('editarMensaje',['id'=>$message])}}"><button>Editar</button></a>
             </ul>
         @endif
     </div>
